@@ -274,17 +274,46 @@ Poly::Poly(int size){
 Poly::Poly(const Poly& aPoly){
     int *newPoly = new int[arraySize]();
     for(int i=0; i<arraySize;i++){
-        newPoly[i] = aPoly[i];
+        newPoly[i] = aPoly.getCoeff(i);
     }
 }
 Poly::~Poly(){
     delete [] coeff;
 }
-Poly::void grow(int newSize){
+void Poly::grow(int newSize){
     if(newSize>arraySize){
-        arraySize = newSize;
-        
+        int *temp = new int[newSize]();
+    for (int i=0; i<arraySize; ++i){
+        temp[i] = coeff[i];
+    }
+    arraySize = newSize;
+    delete [] coeff;
+    coeff = temp; 
     }
 }
-
+int Poly:: degree() const{
+    int high = 0; 
+    for(int i =0; i<arraySize;i++){
+        if(coeff[i]>0 && i>high){
+            high = i; 
+        }
+    }
+    return high; 
+}
+void Poly::setCoeff(int value,int i){
+    coeff[i] = value; 
+}
+int Poly::getCoeff(int i) const{
+    if(i>=arraySize){
+        return 0;
+    }
+    else{
+        return coeff[i];
+    }
+}
+void Poly::negate(){
+    for(int i=0;i<arraySize;i++){
+        coeff[i] = -1*coeff[i];
+    }
+}
 //Class function definitions
