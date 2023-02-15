@@ -7,7 +7,7 @@
 
 
 
-#include <cmath>
+#include <math.h>
 #include <iostream>
 #include <iomanip> 
 using namespace std;
